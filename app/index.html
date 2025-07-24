@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> Project Preview </title>
+    <script src="https://ui5.sap.com/1.129.2/resources/sap-ui-core.js" 
+            id="sap-ui-bootstrap"
+            data-sap-ui-theme="sap_horizon"
+            data-sap-ui-bindingSyntax="complex" 
+            data-sap-ui-xx-bindingSyntax="complex"
+            data-sap-ui-resourceroots='{"assets": "assets"}' 
+            data-sap-ui-libs="sap.m,sap.uxap,sap.ui.layout,sap.f">
+    </script>
+    <link rel="stylesheet" href="assets/preview.css">
+</head>
+
+<body id="body" class="sapUiBody">
+    <script>
+        "use strict";
+        sap.ui.localResources("assets");
+        (function (jQuery, App, Page) {
+            sap.ui.getCore().attachInit(function () {
+                sap.ui.define([
+                    "sap/ui/core/mvc/Controller",
+                    "sap/ui/model/json/JSONModel"
+                ], function (Controller, JSONModel) {
+                    return Controller.extend("PreviewController", {
+                        onInit: function () {
+
+                            const data = {"Services":[{"ServiceName":"ESPMService","DetailsURL":"./service/ESPM/","Metadata":"./service/ESPM/$metadata","Entities":[{"Name":"PurchaseOrderItems","URL":"./service/ESPM/PurchaseOrderItems","FioriURL":"$fiori-preview/ESPMService/PurchaseOrderItems#preview-app"},{"Name":"SalesOrderItems","URL":"./service/ESPM/SalesOrderItems","FioriURL":"$fiori-preview/ESPMService/SalesOrderItems#preview-app"},{"Name":"Products","URL":"./service/ESPM/Products","FioriURL":"$fiori-preview/ESPMService/Products#preview-app"},{"Name":"PurchaseOrderHeaders","URL":"./service/ESPM/PurchaseOrderHeaders","FioriURL":"$fiori-preview/ESPMService/PurchaseOrderHeaders#preview-app"},{"Name":"ProductCategories","URL":"./service/ESPM/ProductCategories","FioriURL":"$fiori-preview/ESPMService/ProductCategories#preview-app"},{"Name":"SalesOrderHeaders","URL":"./service/ESPM/SalesOrderHeaders","FioriURL":"$fiori-preview/ESPMService/SalesOrderHeaders#preview-app"},{"Name":"ProductTexts","URL":"./service/ESPM/ProductTexts","FioriURL":"$fiori-preview/ESPMService/ProductTexts#preview-app"},{"Name":"Customers","URL":"./service/ESPM/Customers","FioriURL":"$fiori-preview/ESPMService/Customers#preview-app"},{"Name":"Stock","URL":"./service/ESPM/Stock","FioriURL":"$fiori-preview/ESPMService/Stock#preview-app"},{"Name":"Suppliers","URL":"./service/ESPM/Suppliers","FioriURL":"$fiori-preview/ESPMService/Suppliers#preview-app"}],"EntitiesCount":10}]}
+                            this.getView().setModel(new JSONModel(data));
+                        }
+                    });
+                });
+                var oApp = new App()
+                var previewView = sap.ui.view({
+                    viewName: "assets.Preview",
+                    type: sap.ui.core.mvc.ViewType.XML
+                });
+                oApp.addPage(new Page({
+                    content: [previewView],
+                    showHeader: false
+                })).placeAt("content");
+            });
+
+        }(jQuery, sap.m.App, sap.m.Page));
+    </script>
+    <div id="content"></div>
+</body>
+
+</html>
